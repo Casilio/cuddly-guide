@@ -1,0 +1,4 @@
+*.o
+write
+read
+add_year
