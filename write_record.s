@@ -16,10 +16,10 @@ write_record:
 
   pushl %ebx
 
+  movl $SYS_WRITE, %eax
   movl ST_FILEDES(%ebp), %ebx
   movl ST_BUFFER(%ebp), %ecx
   movl $RECORD_SIZE, %edx
-  movl $SYS_WRITE, %eax
   int $LINUX_SYSCALL
 
   popl %ebx
