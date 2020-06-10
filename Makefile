@@ -12,7 +12,7 @@ all: write read add_year
 write: write_records.o write_record.o
 	$(LD) $(LDFLAGS) -o $@ $^
 
-read: read_record.o read_records.o count_chars.o write_newline.o
+read: read_record.o read_records.o count_chars.o write_newline.o print_number.o
 	$(LD) $(LDFLAGS) -o $@ $^
 
 add_year: add_year.o read_record.o write_record.o 

@@ -69,24 +69,19 @@ record_read_loop:
   call write_field
   addl $16, %esp
 
-#  pushl ST_OUTPUT_FILDES(%ebp)
-#  pushl $age
-#  pushl $AGE_LEN
-#  pushl $RECORD_AGE
-#  call write_field
-#  addl $16, %esp
-
+  # TODO: clean this up(create function or smth)
   movl $SYS_WRITE, %eax
   movl ST_OUTPUT_FILDES(%ebp), %ebx
   movl $age, %ecx
   movl $AGE_LEN, %edx
   int $LINUX_SYSCALL
 
-  movl $SYS_WRITE, %eax
-  movl ST_OUTPUT_FILDES(%ebp), %ebx
-  addl $RECORD_AGE + record_buffer, %ecx
-  movl $4, %edx
-  int $LINUX_SYSCALL
+  pushl ST_OUTPUT_FILDES(%ebp)
+  movl $RECORD_AGE + record_buffer, %eax
+  movl (%eax), %eax
+  pushl %eax
+  call print_number
+  addl $8, %esp
 
   pushl ST_OUTPUT_FILDES(%ebp)
   call write_newline
@@ -99,8 +94,8 @@ record_read_loop:
   jmp record_read_loop
 
 finished_reading:
+  movl %eax, %ebx
   movl $SYS_EXIT, %eax
-  movl $0, %ebx
   int $LINUX_SYSCALL
 
 # PARAMS
