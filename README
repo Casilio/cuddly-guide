@@ -1,0 +1,6 @@
+Set of programs to work with a simple database.
+
+`write` creates a database.
+`read` read the data into stdout.
+`add_year` modifies(supposedly) data by increasing each record's year value by one. 
+
