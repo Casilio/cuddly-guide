@@ -1,4 +1,4 @@
-.include "record-def.s"
+.include "record_def.s"
 .include "linux.s"
 
 # PARAMS

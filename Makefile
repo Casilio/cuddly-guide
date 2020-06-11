@@ -1,11 +1,11 @@
 AS=as
 LD=ld
-AFLAGS=--32 -g
+ASFLAGS=--32 -g
 LDFLAGS=-m elf_i386
 DEPS = linux.s record-def.s
 
 %.o: %.s $(DEPS)
-	$(AS) $(AFLAGS) -o $@ $^
+	$(AS) $(ASFLAGS) -o $@ $^
 
 all: write read add_year
 
