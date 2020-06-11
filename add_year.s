@@ -27,6 +27,21 @@ _start:
 
   movl %eax, ST_INPUT_FD(%ebp)
 
+  cmpl $0, %eax
+  jg continue_processing
+
+.section .data
+no_open_file_code:
+  .ascii "0001: \0"
+no_open_file_msg:
+  .ascii "Can't open input file\0"
+
+.section .text
+  pushl $no_open_file_msg
+  pushl $no_open_file_code
+  call error_exit
+
+continue_processing:
   movl $SYS_OPEN, %eax
   movl $output_file_name, %ebx
   movl $CREATE_WRITE_TRUNC, %ecx
